@@ -53,23 +53,23 @@ jobs:
         path: D:/a/kdmapper/kdmapper/x64/Release/*
         compression-level: 9
 
-  create-release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    steps:
-      - uses: actions/checkout@v4
+  # create-release:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: kdmapper
+  #     - name: Download Artifact
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: kdmapper
 
-      - name: Create Release and Upload Asset
-        run: |
-          tag=$(date +'%Y.%m.%d-%H%M%S')
-          title="${GITHUB_REPOSITORY#*/} ${tag}"
-          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "$title" --generate-notes
-          gh release upload "$tag" ./*.exe --repo "$GITHUB_REPOSITORY"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Create Release and Upload Asset
+  #       run: |
+  #         tag=$(date +'%Y.%m.%d-%H%M%S')
+  #         title="${GITHUB_REPOSITORY#*/} ${tag}"
+  #         gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "$title" --generate-notes
+  #         gh release upload "$tag" ./*.exe --repo "$GITHUB_REPOSITORY"
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
