@@ -65,19 +65,16 @@ jobs:
         with:
           name: kdmapper
 
-      # - name: Setup GitHub CLI
-      #   run: sudo apt-get update && sudo apt-get install gh -y
-
-      # - name: Configure GitHub CLI
-      #   run: gh auth setup-git
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create Release and Upload Asset
         run: |
-          tag=$(date +'%Y%m%d%H%M%S')
-          title="${GITHUB_REPOSITORY#*/} ${tag#v}"
-          gh release create $tag --repo $GITHUB_REPOSITORY --title "$title" --generate-notes
-          gh release upload $tag ./kdmapper/* --repo $GITHUB_REPOSITORY
+          tag=$(date +'%Y.%m.%d-%H%M%S')
+          title="${GITHUB_REPOSITORY#*/} ${tag}"
+          ls -la
+          # gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "$title" --generate-notes
+          # for file in kdmapper/*; do
+          #   if [ -f "$file" ]; then
+          #     gh release upload "$tag" "$file" --repo "$GITHUB_REPOSITORY"
+          #   fi
+          # done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
