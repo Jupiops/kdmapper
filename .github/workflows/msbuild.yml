@@ -25,7 +25,8 @@ env:
   PLATFORM: x64
 
 permissions:
-  contents: read
+  contents: write
+  issues: write
 
 jobs:
   build:
