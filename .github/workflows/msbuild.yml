@@ -69,12 +69,7 @@ jobs:
         run: |
           tag=$(date +'%Y.%m.%d-%H%M%S')
           title="${GITHUB_REPOSITORY#*/} ${tag}"
-          ls -la
-          # gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "$title" --generate-notes
-          # for file in kdmapper/*; do
-          #   if [ -f "$file" ]; then
-          #     gh release upload "$tag" "$file" --repo "$GITHUB_REPOSITORY"
-          #   fi
-          # done
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "$title" --generate-notes
+          gh release upload "$tag" ./*.exe --repo "$GITHUB_REPOSITORY"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
